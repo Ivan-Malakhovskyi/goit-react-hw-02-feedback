@@ -1,13 +1,22 @@
+import { ItemButton } from "./FeedbackOptions.styled";
 
 
-export const FeedBackOptions = ({title,options,onLeaveFeedback}) => {
+export const FeedBackOptions = ({ title, options, onLeaveFeedback }) => {
+  
+   const optionLabels = {
+    good: 'Good',
+    neutral: 'Neutral',
+    bad: 'Bad'
+  };
+
       return (
         <div>
           <h2>{title}</h2>
               <div>
-                  <button type="button" onClick={() => onLeaveFeedback(options[0])}>Good</button>
-                  <button type="button"  onClick={() => onLeaveFeedback(options[1])}>Neutral</button>
-                  <button type="button"  onClick={() => onLeaveFeedback(options[2])}>Bad</button>
+                 
+            {options.map((option,idx) => 
+              <ItemButton key={idx} type="button" onClick={() => onLeaveFeedback(option)}>{ optionLabels[option]}</ItemButton >
+            ) }
               </div>
         </div>
       )

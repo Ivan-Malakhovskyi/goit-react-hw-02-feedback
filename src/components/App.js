@@ -3,6 +3,7 @@ import {  FeedBackOptions } from "./feedbackOptions/FeedbackOptions";
 import { StatisticsFeedBack } from "./statisticsFeedBack/StatisticsFeedBack";
 import { Section } from "./section/Section";
 import { StatisticIsEmpty } from "./emptyStatistics/StatisticsIsEmpty";
+import { Layout } from "./Layout";
 
 export class App extends Component  {
     state = {
@@ -41,7 +42,7 @@ export class App extends Component  {
     const hasFeedBack = good + neutral + bad > 0;
     
     return (
-      <div>
+      <Layout>
         <Section title="Give Feedback">
               <FeedBackOptions
             options={["good","neutral","bad"]}
@@ -50,14 +51,16 @@ export class App extends Component  {
         </Section>
         
         <Section title='Statistics'>
-        {hasFeedBack ? (<StatisticsFeedBack
+          {hasFeedBack ? (
+            <StatisticsFeedBack
           good={good} neutral={neutral} bad={bad}
           totalFeedback={this.countTotalFeedback()}
           calcPositiveFeedback={this.countPositiveFeedbackPercentage()}
-          />) : <StatisticIsEmpty message='There is no feedback'/>
+            />)
+            : <StatisticIsEmpty message='There is no feedback' />
         }
             
       </Section>
-    </div>)
+    </Layout>)
   }
 };
